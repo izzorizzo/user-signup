@@ -51,7 +51,7 @@ def signup():
 
 
         # validates email
-        if (len(email) >=3 and len(email) <20) and "@" in email and "." in email and " " in email: 
+        if (len(email) >=3 and len(email) <20) and "@" in email and "." in email and " " not in email: 
             return True
         else: 
             email_error = "Please input valid email address that is between 3 and 20 characters long."
@@ -60,14 +60,16 @@ def signup():
 
         #redirects if no errors show up
         if (username_error == "") and (password_error == "") and (verify_error == "") and (email_error == ""):
-            return redirect("/welcome", username=username)
+            return render_template("welcome.html", username=username)
         
+
+        return render_template("signup.html", title="Signup", username_error=username_error, password_error=password_error, verify_error=verify_error, email_error=email_error, username=username, password=password, verify=verify, email=email)
 
     return render_template("signup.html", title="Signup")
 
 
 @app.route("/welcome", methods = ["POST", "GET"])
 def welcome():
-    return render_template("welcome.html", title="WELCOME")
+    return render_template("welcome.html", title="WELCOME", username=username)
 
 app.run()
