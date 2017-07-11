@@ -7,19 +7,24 @@ app.config['DEBUG'] = True
 @app.route("/signup", methods= ["POST", "GET"])
 def signup():
 
+    return render_template("signup.html", title="Signup")
+
     if request.method == "POST":
+
+        #requests info from form
         username = request.form["username"]
         password = request.form["password"]
         verify = request.form["verify"]
         email = request.form["email"]
 
-        username_error = ''
-        password_error = ''
-        verify_error = '' 
-        email_error = ''
+        #empty strings for errors 
+        username_error = ""
+        password_error = ""
+        verify_error = "" 
+        email_error = ""
 
         def validate_username(username):
-            #checks length of username
+        #checks length of username
             if len(username) >=3 and len(username) <20:
                 return True
             else:
@@ -29,7 +34,7 @@ def signup():
             
         
         def validate_password(password):
-            # checks length of password
+        # checks length of password
             if len(password) >=3 and len(password) <20:
                 return True
             else:
@@ -39,8 +44,8 @@ def signup():
                 verify = ""
 
         
-        def validate_verify(verify):
-            # checks passwords match
+        def validate_verify(password, verify):
+        # checks passwords match
             if password == verify:
                 return True
             else:
@@ -58,11 +63,13 @@ def signup():
                 email = ""
 
 
-        if not username_error and not password_error and not verify_error and not email_error:
+        #if not username_error and not password_error and not verify_error and not email_error:
+
+        #if validate_username(username) == True and validate_password(password) == True and validate_verify(verify) == True and validate_email(email) == True:
+
+        if (username_error == "") and (password_error == "") and (verify_error == "") and (email_error == ""):
             return redirect("/welcome")
 
-
-    return render_template("signup.html", title="Signup")
 
 @app.route("/welcome", methods = ["POST", "GET"])
 def welcome():
