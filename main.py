@@ -60,10 +60,9 @@ def signup():
 
         #redirects if no errors show up
         if (username_error == "") and (password_error == "") and (verify_error == "") and (email_error == ""):
-            return render_template("welcome.html?username={0}".format(username))
-        
-
-        return render_template("signup.html", title="Signup", username_error=username_error, password_error=password_error, verify_error=verify_error, email_error=email_error, username=username, password=password, verify=verify, email=email)
+            return redirect("/welcome.html?username={0}".format(username))
+        else: 
+            return render_template("signup.html", title="Signup", username_error=username_error, password_error=password_error, verify_error=verify_error, email_error=email_error, username=username, password=password, verify=verify, email=email) 
 
     return render_template("signup.html", title="Signup")
 
