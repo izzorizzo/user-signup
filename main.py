@@ -15,7 +15,7 @@ def signup():
         password = request.form["password"]
         verify = request.form["verify"]
         email = request.form["email"]
-        
+
 
         #empty strings for errors 
         username_error = ""
@@ -48,16 +48,19 @@ def signup():
 
 
         # validates email
-        if len(email) <=3 or len(email) >=20:
-            email_error = "Please input a valid email address that has between 3 and 20 characters long, and contains a '@' symbol, a '.', and has no spaces."
-            # wipes out email field
-            email = ""
-
-
-        if "@" not in email or "." not in email or " " in email:
-            email_error = "Please input a valid email address that has between 3 and 20 characters long, and contains a '@' symbol, a '.', and has no spaces."
-            # wipes out email field
-            email = ""
+        if email != "":
+            
+            # checks length of email
+            if len(email) <=3 or len(email) >=20:
+                email_error = "Please input a valid email address that has between 3 and 20 characters long, and contains a '@' symbol, a '.', and has no spaces."
+                # wipes out email field
+                email = ""
+            
+            # checks if necessary characters are in email
+            if "@" not in email or "." not in email or " " in email:
+                email_error = "Please input a valid email address that has between 3 and 20 characters long, and contains a '@' symbol, a '.', and has no spaces."
+                # wipes out email field
+                email = ""
 
 
         #redirects if no errors show up
